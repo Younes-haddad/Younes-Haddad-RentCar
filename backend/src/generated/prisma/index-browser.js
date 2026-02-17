@@ -120,15 +120,37 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  passwordHash: 'passwordHash',
+  role: 'role',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.VehicleScalarFieldEnum = {
   id: 'id',
   name: 'name',
   brand: 'brand',
-  city: 'city',
+  location: 'location',
   pricePerDay: 'pricePerDay',
   deposit: 'deposit',
   mileageLimit: 'mileageLimit',
   minAge: 'minAge',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ReservationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  vehicleId: 'vehicleId',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  totalPrice: 'totalPrice',
+  delivery: 'delivery',
+  deliveryAddress: 'deliveryAddress',
+  status: 'status',
   createdAt: 'createdAt'
 };
 
@@ -142,9 +164,26 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.Role = exports.$Enums.Role = {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
+};
+
+exports.ReservationStatus = exports.$Enums.ReservationStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  CANCELLED: 'CANCELLED',
+  COMPLETED: 'COMPLETED'
+};
 
 exports.Prisma.ModelName = {
-  Vehicle: 'Vehicle'
+  User: 'User',
+  Vehicle: 'Vehicle',
+  Reservation: 'Reservation'
 };
 
 /**
