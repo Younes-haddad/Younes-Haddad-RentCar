@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Vehicle {
+  id           String   @id @default(uuid())
+  name         String
+  brand        String
+  city         String
+  pricePerDay  Int
+  deposit      Int
+  mileageLimit Int
+  minAge       Int
+  createdAt    DateTime @default(now())
+}
