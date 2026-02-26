@@ -1150,6 +1150,8 @@ export namespace Prisma {
     id: string | null
     email: string | null
     passwordHash: string | null
+    firstName: string | null
+    lastName: string | null
     role: $Enums.Role | null
     createdAt: Date | null
   }
@@ -1158,6 +1160,8 @@ export namespace Prisma {
     id: string | null
     email: string | null
     passwordHash: string | null
+    firstName: string | null
+    lastName: string | null
     role: $Enums.Role | null
     createdAt: Date | null
   }
@@ -1166,6 +1170,8 @@ export namespace Prisma {
     id: number
     email: number
     passwordHash: number
+    firstName: number
+    lastName: number
     role: number
     createdAt: number
     _all: number
@@ -1176,6 +1182,8 @@ export namespace Prisma {
     id?: true
     email?: true
     passwordHash?: true
+    firstName?: true
+    lastName?: true
     role?: true
     createdAt?: true
   }
@@ -1184,6 +1192,8 @@ export namespace Prisma {
     id?: true
     email?: true
     passwordHash?: true
+    firstName?: true
+    lastName?: true
     role?: true
     createdAt?: true
   }
@@ -1192,6 +1202,8 @@ export namespace Prisma {
     id?: true
     email?: true
     passwordHash?: true
+    firstName?: true
+    lastName?: true
     role?: true
     createdAt?: true
     _all?: true
@@ -1273,6 +1285,8 @@ export namespace Prisma {
     id: string
     email: string
     passwordHash: string
+    firstName: string
+    lastName: string
     role: $Enums.Role
     createdAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1298,6 +1312,8 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     passwordHash?: boolean
+    firstName?: boolean
+    lastName?: boolean
     role?: boolean
     createdAt?: boolean
     reservations?: boolean | User$reservationsArgs<ExtArgs>
@@ -1308,6 +1324,8 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     passwordHash?: boolean
+    firstName?: boolean
+    lastName?: boolean
     role?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1316,6 +1334,8 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     passwordHash?: boolean
+    firstName?: boolean
+    lastName?: boolean
     role?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1324,11 +1344,13 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     passwordHash?: boolean
+    firstName?: boolean
+    lastName?: boolean
     role?: boolean
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "role" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "firstName" | "lastName" | "role" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reservations?: boolean | User$reservationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1345,6 +1367,8 @@ export namespace Prisma {
       id: string
       email: string
       passwordHash: string
+      firstName: string
+      lastName: string
       role: $Enums.Role
       createdAt: Date
     }, ExtArgs["result"]["user"]>
@@ -1774,6 +1798,8 @@ export namespace Prisma {
     readonly id: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly passwordHash: FieldRef<"User", 'String'>
+    readonly firstName: FieldRef<"User", 'String'>
+    readonly lastName: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'Role'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
   }
@@ -4570,6 +4596,8 @@ export namespace Prisma {
     id: 'id',
     email: 'email',
     passwordHash: 'passwordHash',
+    firstName: 'firstName',
+    lastName: 'lastName',
     role: 'role',
     createdAt: 'createdAt'
   };
@@ -4739,6 +4767,8 @@ export namespace Prisma {
     id?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     passwordHash?: StringFilter<"User"> | string
+    firstName?: StringFilter<"User"> | string
+    lastName?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
     createdAt?: DateTimeFilter<"User"> | Date | string
     reservations?: ReservationListRelationFilter
@@ -4748,6 +4778,8 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     passwordHash?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     reservations?: ReservationOrderByRelationAggregateInput
@@ -4760,6 +4792,8 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     passwordHash?: StringFilter<"User"> | string
+    firstName?: StringFilter<"User"> | string
+    lastName?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
     createdAt?: DateTimeFilter<"User"> | Date | string
     reservations?: ReservationListRelationFilter
@@ -4769,6 +4803,8 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     passwordHash?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -4783,6 +4819,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     passwordHash?: StringWithAggregatesFilter<"User"> | string
+    firstName?: StringWithAggregatesFilter<"User"> | string
+    lastName?: StringWithAggregatesFilter<"User"> | string
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -4958,6 +4996,8 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
+    firstName: string
+    lastName: string
     role?: $Enums.Role
     createdAt?: Date | string
     reservations?: ReservationCreateNestedManyWithoutUserInput
@@ -4967,6 +5007,8 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
+    firstName: string
+    lastName: string
     role?: $Enums.Role
     createdAt?: Date | string
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
@@ -4976,6 +5018,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUpdateManyWithoutUserNestedInput
@@ -4985,6 +5029,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
@@ -4994,6 +5040,8 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
+    firstName: string
+    lastName: string
     role?: $Enums.Role
     createdAt?: Date | string
   }
@@ -5002,6 +5050,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5010,6 +5060,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5245,6 +5297,8 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     passwordHash?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
   }
@@ -5253,6 +5307,8 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     passwordHash?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
   }
@@ -5261,6 +5317,8 @@ export namespace Prisma {
     id?: SortOrder
     email?: SortOrder
     passwordHash?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
   }
@@ -5959,6 +6017,8 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
+    firstName: string
+    lastName: string
     role?: $Enums.Role
     createdAt?: Date | string
   }
@@ -5967,6 +6027,8 @@ export namespace Prisma {
     id?: string
     email: string
     passwordHash: string
+    firstName: string
+    lastName: string
     role?: $Enums.Role
     createdAt?: Date | string
   }
@@ -6022,6 +6084,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6030,6 +6094,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

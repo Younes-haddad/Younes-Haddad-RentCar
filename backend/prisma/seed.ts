@@ -24,32 +24,38 @@ async function main() {
   await prisma.user.deleteMany();
 
   // USERS
-  console.log("Creating users...");
-  const passwordHash = await bcrypt.hash("password123", 10);
+console.log("Creating users...");
+const passwordHash = await bcrypt.hash("password123", 10);
 
-  const admin = await prisma.user.create({
-    data: {
-      email: "admin@rentcar.com",
-      passwordHash,
-      role: "ADMIN",
-    },
-  });
+const admin = await prisma.user.create({
+  data: {
+    email: "admin@rentcar.com",
+    passwordHash,
+    firstName: "Admin",
+    lastName: "RentCar",
+    role: "ADMIN",
+  },
+});
 
-  const user1 = await prisma.user.create({
-    data: {
-      email: "client1@rentcar.com",
-      passwordHash,
-      role: "USER",
-    },
-  });
+const user1 = await prisma.user.create({
+  data: {
+    email: "client1@rentcar.com",
+    passwordHash,
+    firstName: "Jean",
+    lastName: "Dupont",
+    role: "USER",
+  },
+});
 
-  const user2 = await prisma.user.create({
-    data: {
-      email: "client2@rentcar.com",
-      passwordHash,
-      role: "USER",
-    },
-  });
+const user2 = await prisma.user.create({
+  data: {
+    email: "client2@rentcar.com",
+    passwordHash,
+    firstName: "Marie",
+    lastName: "Martin",
+    role: "USER",
+  },
+});
 
   // VEHICLES
   console.log("Creating vehicles...");
