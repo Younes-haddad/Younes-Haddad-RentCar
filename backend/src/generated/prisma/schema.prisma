@@ -23,6 +23,8 @@ model User {
   id           String   @id @default(uuid())
   email        String   @unique
   passwordHash String
+  firstName    String
+  lastName     String
   role         Role     @default(USER)
   createdAt    DateTime @default(now())
 
@@ -33,7 +35,7 @@ model Vehicle {
   id           String   @id @default(uuid())
   name         String
   brand        String
-  location     String // city where vehicle is based
+  location     String
   pricePerDay  Int
   deposit      Int
   mileageLimit Int
