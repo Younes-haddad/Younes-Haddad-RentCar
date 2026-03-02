@@ -17,10 +17,15 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
     }
 
     // Vérifier et décoder le token
-    const payload = jwt.verify(token, process.env.JWT_SECRET as string);
+  const payload = jwt.verify(token, process.env.JWT_SECRET as string) as {
+  sub: string;
+  role: string;
+  iat?: number;
+  exp?: number;
+};
 
-    // Ajouter les infos du token dans req.user
-    req.user = payload as { userId: string; role: string };
+  req.user = payload;
+
 
     next(); // On continue vers la route
   } catch (err) {

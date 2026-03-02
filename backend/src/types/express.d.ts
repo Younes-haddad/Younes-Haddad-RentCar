@@ -1,10 +1,12 @@
 import "express";
 
-declare module "express" {
-  export interface Request {
+declare module "express-serve-static-core" {
+  interface Request {
     user?: {
-      userId: string;
+      sub: string;
       role: string;
+      iat?: number;
+      exp?: number;
     };
   }
 }
