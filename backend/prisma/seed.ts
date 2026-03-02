@@ -1,7 +1,7 @@
 import "dotenv/config";
 import bcrypt from "bcrypt";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "../src/generated/prisma";
+import { PrismaClient } from "@prisma/client";
 
 if (!process.env.DATABASE_URL) {
   console.error("Error: DATABASE_URL is not defined");
@@ -17,48 +17,42 @@ const prisma = new PrismaClient({ adapter });
 async function main() {
   console.log("Seeding database...");
 
-  // CLEAN
-  console.log("Cleaning tables...");
   await prisma.reservation.deleteMany();
   await prisma.vehicle.deleteMany();
   await prisma.user.deleteMany();
 
-  // USERS
-console.log("Creating users...");
-const passwordHash = await bcrypt.hash("password123", 10);
+  const passwordHash = await bcrypt.hash("password123", 10);
 
-const admin = await prisma.user.create({
-  data: {
-    email: "admin@rentcar.com",
-    passwordHash,
-    firstName: "Admin",
-    lastName: "RentCar",
-    role: "ADMIN",
-  },
-});
+  const admin = await prisma.user.create({
+    data: {
+      email: "admin@rentcar.com",
+      passwordHash,
+      firstName: "Admin",
+      lastName: "RentCar",
+      role: "ADMIN",
+    },
+  });
 
-const user1 = await prisma.user.create({
-  data: {
-    email: "client1@rentcar.com",
-    passwordHash,
-    firstName: "Jean",
-    lastName: "Dupont",
-    role: "USER",
-  },
-});
+  const user1 = await prisma.user.create({
+    data: {
+      email: "client1@rentcar.com",
+      passwordHash,
+      firstName: "Jean",
+      lastName: "Dupont",
+      role: "USER",
+    },
+  });
 
-const user2 = await prisma.user.create({
-  data: {
-    email: "client2@rentcar.com",
-    passwordHash,
-    firstName: "Marie",
-    lastName: "Martin",
-    role: "USER",
-  },
-});
+  const user2 = await prisma.user.create({
+    data: {
+      email: "client2@rentcar.com",
+      passwordHash,
+      firstName: "Marie",
+      lastName: "Martin",
+      role: "USER",
+    },
+  });
 
-  // VEHICLES
-  console.log("Creating vehicles...");
   const vehicles = await prisma.vehicle.createManyAndReturn({
     data: [
       {
@@ -94,17 +88,11 @@ const user2 = await prisma.user.create({
     ],
   });
 
-  const v1 = vehicles[0];
-  const v2 = vehicles[1];
-  const v3 = vehicles[2];
-
-  // RESERVATIONS
-  console.log("Creating reservations...");
   await prisma.reservation.createMany({
     data: [
       {
         userId: user1.id,
-        vehicleId: v1.id,
+        vehicleId: vehicles[0].id,
         startDate: new Date("2026-03-10T10:00:00.000Z"),
         endDate: new Date("2026-03-13T10:00:00.000Z"),
         totalPrice: 1800 * 3,
@@ -114,7 +102,7 @@ const user2 = await prisma.user.create({
       },
       {
         userId: user2.id,
-        vehicleId: v2.id,
+        vehicleId: vehicles[1].id,
         startDate: new Date("2026-03-20T10:00:00.000Z"),
         endDate: new Date("2026-03-22T10:00:00.000Z"),
         totalPrice: 2000 * 2,
@@ -124,7 +112,7 @@ const user2 = await prisma.user.create({
       },
       {
         userId: user1.id,
-        vehicleId: v3.id,
+        vehicleId: vehicles[2].id,
         startDate: new Date("2026-04-01T10:00:00.000Z"),
         endDate: new Date("2026-04-05T10:00:00.000Z"),
         totalPrice: 1400 * 4,
@@ -136,7 +124,6 @@ const user2 = await prisma.user.create({
   });
 
   console.log("Seed done!");
-  console.log(`Admin: admin@rentcar.com / password123`);
 }
 
 main()

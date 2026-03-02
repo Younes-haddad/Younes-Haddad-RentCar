@@ -1,8 +1,8 @@
-"use client";
+ "use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./page.module.css";
+import styles from "./register.module.css";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -17,19 +17,12 @@ export default function RegisterPage() {
     event.preventDefault();
     setErrorMessage("");
 
-    const payload = {
-      email,
-      password,
-      firstName,
-      lastName,
-    };
+    const payload = { email, password, firstName, lastName };
 
     try {
       const response = await fetch("http://localhost:4000/auth/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
@@ -40,65 +33,74 @@ export default function RegisterPage() {
 
       const errorData = await response.json();
       setErrorMessage(errorData.message || "Une erreur est survenue");
-
     } catch (err) {
       setErrorMessage("Impossible de contacter le serveur");
     }
   }
 
   return (
-    <main className={styles.container}>
-      <h1 className={styles.title}>Créer un compte</h1>
+    <div className={styles.page}>
+      <div className={styles.card}>
+        <img src="/images/logo.png" alt="Logo" className={styles.logo} />
 
-      {errorMessage && (
-        <p style={{ color: "red", marginBottom: 10 }}>{errorMessage}</p>
-      )}
+        <h1 className={styles.title}>Créer un compte</h1>
 
-      <form onSubmit={handleSubmit}>
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Email</label>
-          <input
-            type="email"
-            className={styles.input}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
 
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Mot de passe</label>
-          <input
-            type="password"
-            className={styles.input}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Email</label>
+            <input
+              type="email"
+              className={styles.input}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Prénom</label>
-          <input
-            type="text"
-            className={styles.input}
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Mot de passe</label>
+            <input
+              type="password"
+              className={styles.input}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Nom</label>
-          <input
-            type="text"
-            className={styles.input}
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Prénom</label>
+            <input
+              type="text"
+              className={styles.input}
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+          </div>
 
-        <button type="submit" className={styles.button}>
-          Créer mon compte
-        </button>
-      </form>
-    </main>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Nom</label>
+            <input
+              type="text"
+              className={styles.input}
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+          </div>
+
+          <button type="submit" className={styles.button}>
+            Créer mon compte
+          </button>
+        </form>
+
+        <p className={styles.loginLink}>
+          Déjà un compte ? <a href="/login">Connectez-vous</a>
+        </p>
+      </div>
+    </div>
   );
 }
