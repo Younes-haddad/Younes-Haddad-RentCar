@@ -42,7 +42,14 @@ export default function LoginPage() {
       // Stocker le token si tu veux
       localStorage.setItem("token", data.token);
 
-      router.push("/dashboard");
+      // redirection selon le rôle 
+      if (data.user.role === "ADMIN") { 
+        router.push("/admin/dashboard"); } 
+      else {
+        router.push("/dashboard"); }
+
+
+
     } catch (err) {
       setError("Impossible de contacter le serveur");
     } finally {
