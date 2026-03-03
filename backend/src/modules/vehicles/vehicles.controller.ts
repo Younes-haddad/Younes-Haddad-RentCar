@@ -5,14 +5,30 @@ import { prisma } from "../../db/prisma";
 
 export async function getVehiclesController(req: Request, res: Response) {
   try {
+    const { city } = req.query;
+
+    const filters: any = {
+      isActive: true,
+    };
+
+    // US10 — Filtre par ville
+    if (city) {
+      filters.location = {
+        equals: String(city),
+        mode: "insensitive",
+      };
+    }
+
     const vehicles = await prisma.vehicle.findMany({
-      where: { isActive: true },
+      where: filters,
       include: {
         images: {
-          take: 1,
+          take: 1, // image principale
         },
       },
-      orderBy: { createdAt: "desc" },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     return res.json(vehicles);
@@ -21,6 +37,7 @@ export async function getVehiclesController(req: Request, res: Response) {
     return res.status(500).json({ message: "Internal server error" });
   }
 }
+
 
 // GET vehicles details by ID 
 
