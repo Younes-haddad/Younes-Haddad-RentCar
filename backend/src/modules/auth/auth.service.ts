@@ -62,7 +62,7 @@ export async function login(input: LoginInput) {
   // 3) Générer le token JWT
   const token = jwt.sign(
     {
-      userId: user.id,
+      sub: user.id,
       role: user.role,
     },
     process.env.JWT_SECRET as string,

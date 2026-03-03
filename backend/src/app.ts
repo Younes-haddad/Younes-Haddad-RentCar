@@ -6,6 +6,7 @@ import "dotenv/config";
 import { healthRoutes } from "./modules/health/health.routes";
 import { authRoutes } from "./modules/auth/auth.routes";
 import { vehiclesRoutes } from "./modules/vehicles/vehicles.routes";
+import adminRoutes from "./modules/admin/admin.routes";
 
 export const app = express();
 
@@ -25,3 +26,4 @@ app.use(
 app.use(healthRoutes);
 app.use("/auth", authRoutes);
 app.use("/vehicles", vehiclesRoutes)
+app.use("/admin", adminRoutes);

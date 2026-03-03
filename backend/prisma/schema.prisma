@@ -30,7 +30,7 @@ model User {
 }
 
 model Vehicle {
-  id           String        @id @default(uuid())
+  id           String          @id @default(uuid())
   name         String
   brand        String
   location     String
@@ -38,9 +38,18 @@ model Vehicle {
   deposit      Int
   mileageLimit Int
   minAge       Int
-  isActive     Boolean       @default(true)
-  createdAt    DateTime      @default(now())
+  isActive     Boolean         @default(true)
+  createdAt    DateTime        @default(now())
+
   reservations Reservation[]
+  images       VehicleImage[]  // 👈 nouvelle relation
+}
+
+model VehicleImage {
+  id         String   @id @default(uuid())
+  url        String
+  vehicleId  String
+  vehicle    Vehicle  @relation(fields: [vehicleId], references: [id])
 }
 
 model Reservation {
@@ -54,6 +63,7 @@ model Reservation {
   deliveryAddress String?
   status          ReservationStatus @default(PENDING)
   createdAt       DateTime          @default(now())
+
   user            User              @relation(fields: [userId], references: [id])
   vehicle         Vehicle           @relation(fields: [vehicleId], references: [id])
 }
