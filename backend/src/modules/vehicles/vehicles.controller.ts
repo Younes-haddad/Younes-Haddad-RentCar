@@ -5,30 +5,46 @@ import { prisma } from "../../db/prisma";
 
 export async function getVehiclesController(req: Request, res: Response) {
   try {
-    const { city } = req.query;
+    const { city, minPrice, maxPrice, sort } = req.query;
 
-    const filters: any = {
-      isActive: true,
-    };
+    const filters: any = { isActive: true };
 
     // US10 — Filtre par ville
     if (city) {
       filters.location = {
-        equals: String(city),
+        contains: String(city),
         mode: "insensitive",
       };
     }
 
+    // US11 — Filtre prix minimum
+    if (minPrice) {
+      filters.pricePerDay = {
+        ...filters.pricePerDay,
+        gte: Number(minPrice),
+      };
+    }
+
+    // US11 — Filtre prix maximum
+    if (maxPrice) {
+      filters.pricePerDay = {
+        ...filters.pricePerDay,
+        lte: Number(maxPrice),
+      };
+    }
+
+    // US12 — Tri (préparé mais pas encore activé)
+    let orderBy: any = undefined;
+
+    if (sort === "price_asc") orderBy = { pricePerDay: "asc" };
+    if (sort === "price_desc") orderBy = { pricePerDay: "desc" };
+
     const vehicles = await prisma.vehicle.findMany({
       where: filters,
       include: {
-        images: {
-          take: 1, // image principale
-        },
+        images: { take: 1 },
       },
-      orderBy: {
-        createdAt: "desc",
-      },
+      orderBy: orderBy ?? { createdAt: "desc" },
     });
 
     return res.json(vehicles);
